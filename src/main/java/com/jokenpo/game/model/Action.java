@@ -17,7 +17,7 @@ public class Action {
 
     private String description;
 
-    @JsonIgnore
+    @JsonIgnoreProperties("actions")
     @ManyToOne
     private Tool source;
 
