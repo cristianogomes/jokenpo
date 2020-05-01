@@ -3,6 +3,7 @@ package com.jokenpo.game.model;
 import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.util.Objects;
@@ -11,6 +12,7 @@ import java.util.Objects;
 public class Action {
 
     @Id
+    @GeneratedValue
     private Long id;
 
     private String description;

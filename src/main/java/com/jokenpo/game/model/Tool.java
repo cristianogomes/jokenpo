@@ -3,10 +3,7 @@ package com.jokenpo.game.model;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,11 +12,13 @@ import java.util.Objects;
 public class Tool {
 
     @Id
+    @GeneratedValue
     private Long id;
 
     private String name;
 
     @OneToMany(mappedBy = "source", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<Action> actions;
 
     public Long getId() {
