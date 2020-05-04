@@ -1,5 +1,6 @@
 package com.jokenpo.game.service;
 
+import com.jokenpo.game.exception.NotFoundException;
 import com.jokenpo.game.model.Action;
 import com.jokenpo.game.repository.ActionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,18 @@ public class ActionService {
         return this.actionRepository.save(action);
     }
 
-    public List<Action> findAll() {
-        return this.actionRepository.findAll();
+    public List<Action> findAll() throws NotFoundException {
+        List<Action> actions =  this.actionRepository.findAll();
+        if (actions.isEmpty()) {
+            throw new NotFoundException();
+        }
+
+        return actions;
     }
 
-    public Optional<Action> findById(Long id) {
-        return this.actionRepository.findById(id);
+    public Action findById(Long id) throws NotFoundException {
+        Optional<Action> entity = this.actionRepository.findById(id);
+        return entity.orElseThrow(() -> new NotFoundException());
     }
 
     public void delete(Long id) {

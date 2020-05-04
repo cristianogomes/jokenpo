@@ -1,14 +1,16 @@
 package com.jokenpo.game.controller;
 
+import com.jokenpo.game.exception.NotFoundException;
 import com.jokenpo.game.model.Action;
+import com.jokenpo.game.model.Tool;
+import com.jokenpo.game.response.Response;
+import com.jokenpo.game.response.ResponseBuilder;
 import com.jokenpo.game.service.ActionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/action")
@@ -18,34 +20,30 @@ public class ActionController {
     private ActionService actionService;
 
     @PostMapping
-    public Action create(@RequestBody Action action) {
-        return this.actionService.create(action);
+    public ResponseEntity<Response<Action>> create(@RequestBody Action action) {
+        Action actionDb = this.actionService.create(action);
+
+        return new ResponseBuilder<Action>().withData(actionDb).build();
     }
 
     @GetMapping
-    public ResponseEntity<?> getAll() {
+    public ResponseEntity<Response<Action>> getAll() throws NotFoundException {
         List<Action> actions = this.actionService.findAll();
 
-        if (!actions.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.OK).body(actions);
-        }
-
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        return new ResponseBuilder<Action>().withData(actions).build();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable Long id) {
-        Optional<Action> action = this.actionService.findById(id);
+    public ResponseEntity<Response<Action>> getById(@PathVariable Long id) throws NotFoundException {
+        Action action = this.actionService.findById(id);
 
-        if (action.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(action.get());
-        }
-
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        return new ResponseBuilder<Action>().withData(action).build();
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public ResponseEntity delete(@PathVariable Long id) {
         this.actionService.delete(id);
+
+        return new ResponseBuilder<Tool>().withMessage("Data deleted").build();
     }
 }
