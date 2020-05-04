@@ -23,3 +23,8 @@ INSERT INTO ACTION (id, description, source_id, target_id) VALUES (8, 'envenena'
 --Ação spock
 INSERT INTO ACTION (id, description, source_id, target_id) VALUES (9, 'vaporiza', 5, 1);
 INSERT INTO ACTION (id, description, source_id, target_id) VALUES (10, 'quebra', 5, 3);
+
+INSERT INTO PLAYER (id, name) VALUES (1, 'Player 1');
+INSERT INTO PLAYER (id, name) VALUES (2, 'Player 2');
+INSERT INTO PLAYER (id, name) VALUES (3, 'Player 3');
+INSERT INTO PLAYER (id, name) VALUES (4, 'Player 4');

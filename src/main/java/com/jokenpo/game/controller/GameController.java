@@ -1,32 +1,30 @@
 package com.jokenpo.game.controller;
 
-import com.jokenpo.game.model.Action;
-import com.jokenpo.game.model.Tool;
-import com.jokenpo.game.repository.ActionRepository;
-import com.jokenpo.game.repository.ToolRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
+
+import com.jokenpo.game.dto.MoveDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import com.jokenpo.game.model.Result;
+import com.jokenpo.game.service.GameService;
 
 @RestController
 public class GameController {
 
     @Autowired
-    private ToolRepository toolRepository;
-
-    @Autowired
-    private ActionRepository actionRepository;
-
-    @GetMapping("/tools")
-    public List<Tool> getTools() {
-        return toolRepository.findAll();
+    private GameService gameService;
+    
+    @PostMapping("/")
+    public ResponseEntity postMove(@RequestBody MoveDTO move) {
+    	this.gameService.doMove(move);
+    	return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/actions")
-    public List<Action> getAction() {
-        return actionRepository.findAll();
+    @GetMapping("/result")
+    public ResponseEntity getResult() {
+        List<Result> results = this.gameService.getResult();
+        return ResponseEntity.ok().body(results);
     }
-
 }
