@@ -1,14 +1,15 @@
 package com.jokenpo.game.controller;
 
+import com.jokenpo.game.exception.NotFoundException;
 import com.jokenpo.game.model.Tool;
+import com.jokenpo.game.response.Response;
+import com.jokenpo.game.response.ResponseBuilder;
 import com.jokenpo.game.service.ToolService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/tool")
@@ -18,34 +19,30 @@ public class ToolController {
     private ToolService toolService;
 
     @PostMapping
-    public Tool create(@RequestBody Tool tool) {
-        return toolService.create(tool);
+    public ResponseEntity create(@RequestBody Tool tool) {
+        Tool toolDb = toolService.create(tool);
+
+        return new ResponseBuilder<Tool>().withData(toolDb).build();
     }
 
     @GetMapping
-    public ResponseEntity<?> getAll() {
+    public ResponseEntity<Response<Tool>> getAll() throws NotFoundException {
         List<Tool> tools = toolService.findAll();
 
-        if (!tools.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.OK).body(tools);
-        }
-
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        return new ResponseBuilder<Tool>().withData(tools).build();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable Long id) {
-        Optional<Tool> tool = toolService.findById(id);
+    public ResponseEntity<Response<Tool>> getById(@PathVariable Long id) throws NotFoundException {
+        Tool tool = toolService.findById(id);
 
-        if (tool.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(tool.get());
-        }
-
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        return new ResponseBuilder<Tool>().withData(tool).build();
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public ResponseEntity delete(@PathVariable Long id) {
         this.toolService.delete(id);
+
+        return new ResponseBuilder<Tool>().withMessage("Data deleted").build();
     }
 }
