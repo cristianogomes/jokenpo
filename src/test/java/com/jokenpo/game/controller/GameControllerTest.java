@@ -68,7 +68,7 @@ public class GameControllerTest {
     public void postMove() throws Exception {
         mockMvc.perform(get("/jokenpo/reset"));
 
-        mockMvc.perform(post("/jokenpo")
+        mockMvc.perform(post("/jokenpo/play")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"playerId\": \"1\", \"toolId\": \"1\"}")
         )
@@ -86,7 +86,7 @@ public class GameControllerTest {
         mockMvc.perform(get("/jokenpo/reset"));
 
         //POST jogador 1
-        mockMvc.perform(post("/jokenpo")
+        mockMvc.perform(post("/jokenpo/play")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"playerId\": \"1\", \"toolId\": \"1\"}")
         )
@@ -96,7 +96,7 @@ public class GameControllerTest {
                 .andExpect(jsonPath("$", Matchers.hasKey("data")));
 
         //POST jogador 2
-        mockMvc.perform(post("/jokenpo")
+        mockMvc.perform(post("/jokenpo/play")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"playerId\": \"2\", \"toolId\": \"3\"}")
         )
