@@ -2,9 +2,9 @@ package com.jokenpo.game.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import com.jokenpo.game.dto.MoveDTO;
+import com.jokenpo.game.exception.NotFoundException;
 import com.jokenpo.game.helper.GameHelper;
 import com.jokenpo.game.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,15 +25,17 @@ public class GameService {
         this.toolService = toolService;
     }
 	
-	public void doMove(MoveDTO move) {
-        Optional<Player> player = this.playerService.findById(move.getPlayerId());
-        Optional<Tool> tool = this.toolService.findById(move.getToolId());
+	public Move doMove(MoveDTO move) throws NotFoundException {
+        Player player = this.playerService.findById(move.getPlayerId());
+        Tool tool = this.toolService.findById(move.getToolId());
 
         Move playerMove = new Move();
-        playerMove.setPlayer(player.get());
-        playerMove.setTool(tool.get());
+        playerMove.setPlayer(player);
+        playerMove.setTool(tool);
 
         this.gameHelper.addMove(playerMove);
+
+        return playerMove;
 	}
 
 	public List<Result> getResult() {

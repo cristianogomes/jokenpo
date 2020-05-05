@@ -3,6 +3,11 @@ package com.jokenpo.game.controller;
 import java.util.List;
 
 import com.jokenpo.game.dto.MoveDTO;
+import com.jokenpo.game.exception.NotFoundException;
+import com.jokenpo.game.model.Action;
+import com.jokenpo.game.model.Move;
+import com.jokenpo.game.response.Response;
+import com.jokenpo.game.response.ResponseBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,14 +22,16 @@ public class GameController {
     private GameService gameService;
     
     @PostMapping("/")
-    public ResponseEntity postMove(@RequestBody MoveDTO move) {
-    	this.gameService.doMove(move);
-    	return ResponseEntity.ok().build();
+    public ResponseEntity<Response<Action>> postMove(@RequestBody MoveDTO move) throws NotFoundException {
+    	Move playerMove = this.gameService.doMove(move);
+
+        return new ResponseBuilder<Move>().withData(playerMove).build();
     }
 
     @GetMapping("/result")
-    public ResponseEntity getResult() {
+    public ResponseEntity<Response<Result>> getResult() {
         List<Result> results = this.gameService.getResult();
-        return ResponseEntity.ok().body(results);
+        
+        return new ResponseBuilder<Result>().withData(results).build();
     }
 }
