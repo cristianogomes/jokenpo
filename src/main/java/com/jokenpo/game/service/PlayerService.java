@@ -1,5 +1,6 @@
 package com.jokenpo.game.service;
 
+import com.jokenpo.game.exception.NotFoundException;
 import com.jokenpo.game.model.Player;
 import com.jokenpo.game.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,18 @@ public class PlayerService {
         return this.playerRepository.save(player);
     }
 
-    public List<Player> findAll() {
-        return this.playerRepository.findAll();
+    public List<Player> findAll() throws NotFoundException {
+        List<Player> players =  this.playerRepository.findAll();
+        if (players.isEmpty()) {
+            throw new NotFoundException();
+        }
+
+        return players;
     }
 
-    public Optional<Player> findById(Long id) {
-        return this.playerRepository.findById(id);
+    public Player findById(Long id) throws NotFoundException {
+        Optional<Player> player = this.playerRepository.findById(id);
+        return player.orElseThrow(() -> new NotFoundException());
     }
 
     public void delete(Long id) {
