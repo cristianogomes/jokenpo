@@ -17,12 +17,13 @@ import com.jokenpo.game.model.Result;
 import com.jokenpo.game.service.GameService;
 
 @RestController
+@RequestMapping("/jokenpo")
 public class GameController {
 
     @Autowired
     private GameService gameService;
     
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<Response<Action>> postMove(@RequestBody MoveDTO move) throws NotFoundException, JokenpoGameException {
     	Move playerMove = this.gameService.doMove(move);
 
@@ -32,7 +33,14 @@ public class GameController {
     @GetMapping("/result")
     public ResponseEntity<Response<Result>> getResult() {
         List<Result> results = this.gameService.getResult();
-        
+        this.gameService.clear();
         return new ResponseBuilder<Result>().withData(results).build();
+    }
+
+    @GetMapping("/reset")
+    public ResponseEntity<Response<Result>> clearGame() {
+        this.gameService.clear();
+
+        return new ResponseBuilder<Result>().withMessage("Clear").build();
     }
 }
