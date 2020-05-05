@@ -1,30 +1,30 @@
-INSERT INTO TOOL VALUES (1, 'pedra');
-INSERT INTO TOOL VALUES (2, 'papel');
-INSERT INTO TOOL VALUES (3, 'tesoura');
-INSERT INTO TOOL VALUES (4, 'lagarto');
-INSERT INTO TOOL VALUES (5, 'spock');
+INSERT INTO TOOL VALUES (1000, 'pedra');
+INSERT INTO TOOL VALUES (2000, 'papel');
+INSERT INTO TOOL VALUES (3000, 'tesoura');
+INSERT INTO TOOL VALUES (4000, 'lagarto');
+INSERT INTO TOOL VALUES (5000, 'spock');
 
 --Ação pedra
-INSERT INTO ACTION (id, description, source_id, target_id) VALUES (1, 'quebra', 1, 3);
-INSERT INTO ACTION (id, description, source_id, target_id) VALUES (2, 'esmaga', 1, 4);
+INSERT INTO ACTION (id, description, source_id, target_id) VALUES (1000, 'quebra', 1000, 3000);
+INSERT INTO ACTION (id, description, source_id, target_id) VALUES (2000, 'esmaga', 1000, 4000);
 
 --Ação papel
-INSERT INTO ACTION (id, description, source_id, target_id) VALUES (3, 'cobre', 2, 1);
-INSERT INTO ACTION (id, description, source_id, target_id) VALUES (4, 'refuta', 2, 5);
+INSERT INTO ACTION (id, description, source_id, target_id) VALUES (3000, 'cobre', 2000, 1000);
+INSERT INTO ACTION (id, description, source_id, target_id) VALUES (4000, 'refuta', 2000, 5000);
 
 --Ação tesoura
-INSERT INTO ACTION (id, description, source_id, target_id) VALUES (5, 'corta', 3, 2);
-INSERT INTO ACTION (id, description, source_id, target_id) VALUES (6, 'mata', 3, 4);
+INSERT INTO ACTION (id, description, source_id, target_id) VALUES (5000, 'corta', 3000, 2000);
+INSERT INTO ACTION (id, description, source_id, target_id) VALUES (6000, 'mata', 3000, 4000);
 
 --Ação lagarto
-INSERT INTO ACTION (id, description, source_id, target_id) VALUES (7, 'come', 4, 2);
-INSERT INTO ACTION (id, description, source_id, target_id) VALUES (8, 'envenena', 4, 5);
+INSERT INTO ACTION (id, description, source_id, target_id) VALUES (7000, 'come', 4000, 2000);
+INSERT INTO ACTION (id, description, source_id, target_id) VALUES (8000, 'envenena', 4000, 5000);
 
 --Ação spock
-INSERT INTO ACTION (id, description, source_id, target_id) VALUES (9, 'vaporiza', 5, 1);
-INSERT INTO ACTION (id, description, source_id, target_id) VALUES (10, 'quebra', 5, 3);
+INSERT INTO ACTION (id, description, source_id, target_id) VALUES (9000, 'vaporiza', 5000, 1000);
+INSERT INTO ACTION (id, description, source_id, target_id) VALUES (10000, 'quebra', 5000, 3000);
 
-INSERT INTO PLAYER (id, name) VALUES (1, 'Player 1');
-INSERT INTO PLAYER (id, name) VALUES (2, 'Player 2');
-INSERT INTO PLAYER (id, name) VALUES (3, 'Player 3');
-INSERT INTO PLAYER (id, name) VALUES (4, 'Player 4');
+INSERT INTO PLAYER (id, name) VALUES (1000, 'Player 1000');
+INSERT INTO PLAYER (id, name) VALUES (2000, 'Player 2000');
+INSERT INTO PLAYER (id, name) VALUES (3000, 'Player 3000');
+INSERT INTO PLAYER (id, name) VALUES (4000, 'Player 4000');
