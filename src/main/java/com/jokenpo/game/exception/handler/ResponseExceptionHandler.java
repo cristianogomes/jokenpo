@@ -1,6 +1,7 @@
 package com.jokenpo.game.exception.handler;
 
 import com.jokenpo.game.exception.BusinessException;
+import com.jokenpo.game.exception.MoveAlreadyExistsException;
 import com.jokenpo.game.exception.NotFoundException;
 import com.jokenpo.game.response.Response;
 import com.jokenpo.game.response.ResponseBuilder;
@@ -22,6 +23,11 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = NotFoundException.class)
     public ResponseEntity<Response> notFoundException(NotFoundException e) {
         return new ResponseBuilder().withError(getError(e)).status(HttpStatus.NOT_FOUND).build();
+    }
+
+    @ExceptionHandler(value = MoveAlreadyExistsException.class)
+    public ResponseEntity<Response> moveAlreadyExists(MoveAlreadyExistsException e) {
+        return new ResponseBuilder().withError(getError(e)).status(HttpStatus.CONFLICT).build();
     }
 
     @Override

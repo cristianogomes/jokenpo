@@ -3,10 +3,10 @@ package com.jokenpo.game;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class JokenpoGameApplicationTests {
 
-	@Test
+//	@Test
 	void contextLoads() {
 	}
 

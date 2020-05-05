@@ -1,7 +1,7 @@
 package com.jokenpo.game.service;
 
 import com.jokenpo.game.dto.MoveDTO;
-import com.jokenpo.game.exception.JokenpoGameException;
+import com.jokenpo.game.exception.MoveAlreadyExistsException;
 import com.jokenpo.game.exception.NotFoundException;
 import com.jokenpo.game.model.Action;
 import com.jokenpo.game.model.Player;
@@ -38,7 +38,7 @@ public class GameServiceTest {
     }
 
     @Test(expected = NotFoundException.class)
-    public void testDoMove_InvalidUser() throws NotFoundException, JokenpoGameException {
+    public void testDoMove_InvalidUser() throws NotFoundException, MoveAlreadyExistsException {
         when(this.playerServiceMock.findById(1L)).thenThrow(new NotFoundException());
         when(this.toolServiceMock.findById(1L)).thenReturn(new Tool());
 
@@ -49,7 +49,7 @@ public class GameServiceTest {
     }
 
     @Test(expected = NotFoundException.class)
-    public void testDoMove_InvalidTool() throws NotFoundException, JokenpoGameException {
+    public void testDoMove_InvalidTool() throws NotFoundException, MoveAlreadyExistsException {
         when(this.playerServiceMock.findById(1L)).thenReturn(new Player());
         when(this.toolServiceMock.findById(1L)).thenThrow(new NotFoundException());
 
@@ -59,8 +59,8 @@ public class GameServiceTest {
         this.gameService.doMove(moveDTO);
     }
 
-    @Test(expected = JokenpoGameException.class)
-    public void testDoMove_AlreadyPlayed() throws NotFoundException, JokenpoGameException {
+    @Test(expected = MoveAlreadyExistsException.class)
+    public void testDoMove_AlreadyPlayed() throws NotFoundException, MoveAlreadyExistsException {
         Player p1 = new Player();
         p1.setId(1L);
         p1.setName("Player Name");
@@ -75,7 +75,7 @@ public class GameServiceTest {
     }
 
     @Test
-    public void testWinner_Player1() throws NotFoundException, JokenpoGameException {
+    public void testWinner_Player1() throws NotFoundException, MoveAlreadyExistsException {
         Player p1 = new Player();
         p1.setId(1L);
         p1.setName("Player Name 1");
@@ -121,7 +121,7 @@ public class GameServiceTest {
     }
 
     @Test
-    public void testWinner_Tie() throws NotFoundException, JokenpoGameException {
+    public void testWinner_Tie() throws NotFoundException, MoveAlreadyExistsException {
         Player p1 = new Player();
         p1.setId(1L);
         p1.setName("Player Name 1");

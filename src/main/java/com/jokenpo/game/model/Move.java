@@ -15,6 +15,12 @@ public class Move {
         this.result = new Result();
     }
 
+    public Move(Player player, Tool tool) {
+        this.player = player;
+        this.tool = tool;
+        this.result = new Result();
+    }
+
     public void addScore() {
         this.result.addScore();
     }
