@@ -2,6 +2,7 @@ package com.jokenpo.game.helper;
 
 import com.jokenpo.game.enums.GameStatus;
 import com.jokenpo.game.exception.MoveAlreadyExistsException;
+import com.jokenpo.game.exception.NotFoundException;
 import com.jokenpo.game.model.*;
 
 import java.util.*;
@@ -21,11 +22,20 @@ public class GameHelper {
         moves = new HashMap<>();
     }
 
-    public Move makeAMove(Player player, Tool tool) throws MoveAlreadyExistsException {
+    public Move doMove(Player player, Tool tool) throws MoveAlreadyExistsException {
         Move playerMove = new Move(player, tool);
         this.addMove(playerMove);
 
         return playerMove;
+    }
+
+    public Move removeMove(Player player) throws NotFoundException {
+         Move move = this.moves.remove(player);
+         if (move != null) {
+             return move;
+         }
+
+         throw new NotFoundException();
     }
 
     private void addMove(Move move) throws MoveAlreadyExistsException {

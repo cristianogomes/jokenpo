@@ -3,12 +3,15 @@ package com.jokenpo.game.controller;
 import java.util.List;
 
 import com.jokenpo.game.dto.MoveDTO;
+import com.jokenpo.game.dto.PlayerDTO;
 import com.jokenpo.game.exception.MoveAlreadyExistsException;
 import com.jokenpo.game.exception.NotFoundException;
 import com.jokenpo.game.model.Action;
 import com.jokenpo.game.model.Move;
+import com.jokenpo.game.model.Player;
 import com.jokenpo.game.response.Response;
 import com.jokenpo.game.response.ResponseBuilder;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +31,16 @@ public class GameController {
     @PostMapping("/play")
     public ResponseEntity<Response<Action>> postMove(@Valid @RequestBody MoveDTO move) throws NotFoundException, MoveAlreadyExistsException {
     	Move playerMove = this.gameService.doMove(move);
+
+        return new ResponseBuilder<Move>().withData(playerMove).build();
+    }
+
+    @PostMapping("/remove")
+    public ResponseEntity<Response<Action>> removeMove(@Valid @RequestBody PlayerDTO playerDTO) throws NotFoundException {
+        Player player = new Player();
+        BeanUtils.copyProperties(playerDTO, player);
+
+        Move playerMove = this.gameService.removeMove(player);
 
         return new ResponseBuilder<Move>().withData(playerMove).build();
     }

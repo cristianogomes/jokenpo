@@ -31,8 +31,12 @@ public class GameService {
         Player player = this.playerService.findById(move.getPlayerId());
         Tool tool = this.toolService.findById(move.getToolId());
 
-        return this.gameHelper.makeAMove(player, tool);
+        return this.gameHelper.doMove(player, tool);
 	}
+
+    public Move removeMove(Player player) throws NotFoundException {
+        return this.gameHelper.removeMove(player);
+    }
 
 	public List<Result> getResult() {
         return this.gameHelper.getResult();
