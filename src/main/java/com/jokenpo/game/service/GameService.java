@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jokenpo.game.dto.MoveDTO;
+import com.jokenpo.game.exception.JokenpoGameException;
 import com.jokenpo.game.exception.NotFoundException;
 import com.jokenpo.game.helper.GameHelper;
 import com.jokenpo.game.model.*;
@@ -24,8 +25,12 @@ public class GameService {
         this.playerService = playerService;
         this.toolService = toolService;
     }
+
+    public void clear() {
+        this.gameHelper.clear();
+    }
 	
-	public Move doMove(MoveDTO move) throws NotFoundException {
+	public Move doMove(MoveDTO move) throws NotFoundException, JokenpoGameException {
         Player player = this.playerService.findById(move.getPlayerId());
         Tool tool = this.toolService.findById(move.getToolId());
 

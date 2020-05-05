@@ -3,6 +3,7 @@ package com.jokenpo.game.controller;
 import java.util.List;
 
 import com.jokenpo.game.dto.MoveDTO;
+import com.jokenpo.game.exception.JokenpoGameException;
 import com.jokenpo.game.exception.NotFoundException;
 import com.jokenpo.game.model.Action;
 import com.jokenpo.game.model.Move;
@@ -22,7 +23,7 @@ public class GameController {
     private GameService gameService;
     
     @PostMapping("/")
-    public ResponseEntity<Response<Action>> postMove(@RequestBody MoveDTO move) throws NotFoundException {
+    public ResponseEntity<Response<Action>> postMove(@RequestBody MoveDTO move) throws NotFoundException, JokenpoGameException {
     	Move playerMove = this.gameService.doMove(move);
 
         return new ResponseBuilder<Move>().withData(playerMove).build();

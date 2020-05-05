@@ -1,5 +1,6 @@
 package com.jokenpo.game.helper;
 
+import com.jokenpo.game.exception.JokenpoGameException;
 import com.jokenpo.game.model.Move;
 import com.jokenpo.game.model.Player;
 
@@ -16,7 +17,15 @@ public class GameHelper {
         return GAME_HELPER;
     }
 
-    public void addMove(Move move) {
+    public void clear() {
+        moves = new HashMap<>();
+    }
+
+    public void addMove(Move move) throws JokenpoGameException {
+        if (this.moves.containsKey(move.getPlayer())) {
+            throw new JokenpoGameException();
+        }
+
         this.moves.put(move.getPlayer(), move);
     }
 
