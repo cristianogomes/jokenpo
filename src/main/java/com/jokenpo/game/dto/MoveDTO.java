@@ -1,9 +1,13 @@
 package com.jokenpo.game.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class MoveDTO {
 
+    @NotNull
     private Long playerId;
 
+    @NotNull
     private Long toolId;
 
     public Long getPlayerId() {

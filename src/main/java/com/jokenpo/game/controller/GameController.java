@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import com.jokenpo.game.model.Result;
 import com.jokenpo.game.service.GameService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/jokenpo")
 public class GameController {
@@ -23,8 +25,8 @@ public class GameController {
     @Autowired
     private GameService gameService;
     
-    @PostMapping
-    public ResponseEntity<Response<Action>> postMove(@RequestBody MoveDTO move) throws NotFoundException, JokenpoGameException {
+    @PostMapping("/play")
+    public ResponseEntity<Response<Action>> postMove(@Valid @RequestBody MoveDTO move) throws NotFoundException, JokenpoGameException {
     	Move playerMove = this.gameService.doMove(move);
 
         return new ResponseBuilder<Move>().withData(playerMove).build();
