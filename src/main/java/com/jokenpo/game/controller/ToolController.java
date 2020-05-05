@@ -1,14 +1,18 @@
 package com.jokenpo.game.controller;
 
+import com.jokenpo.game.dto.ToolDTO;
 import com.jokenpo.game.exception.NotFoundException;
+import com.jokenpo.game.model.Player;
 import com.jokenpo.game.model.Tool;
 import com.jokenpo.game.response.Response;
 import com.jokenpo.game.response.ResponseBuilder;
 import com.jokenpo.game.service.ToolService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,7 +23,10 @@ public class ToolController {
     private ToolService toolService;
 
     @PostMapping
-    public ResponseEntity create(@RequestBody Tool tool) {
+    public ResponseEntity create(@Valid @RequestBody ToolDTO toolDTO) {
+        Tool tool = new Tool();
+        BeanUtils.copyProperties(toolDTO, tool);
+
         Tool toolDb = toolService.create(tool);
 
         return new ResponseBuilder<Tool>().withData(toolDb).build();
