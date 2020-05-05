@@ -1,15 +1,18 @@
 package com.jokenpo.game.controller;
 
+import com.jokenpo.game.dto.PlayerDTO;
 import com.jokenpo.game.exception.NotFoundException;
 import com.jokenpo.game.model.Player;
 import com.jokenpo.game.model.Tool;
 import com.jokenpo.game.response.Response;
 import com.jokenpo.game.response.ResponseBuilder;
 import com.jokenpo.game.service.PlayerService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -20,7 +23,10 @@ public class PlayerController {
     private PlayerService playerService;
 
     @PostMapping
-    public ResponseEntity create(@RequestBody Player player) {
+    public ResponseEntity create(@Valid @RequestBody PlayerDTO playerDTO) {
+        Player player = new Player();
+        BeanUtils.copyProperties(playerDTO, player);
+
         Player playerDb = this.playerService.create(player);
 
         return new ResponseBuilder<Player>().withData(playerDb).build();
