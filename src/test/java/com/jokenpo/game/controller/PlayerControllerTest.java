@@ -97,6 +97,20 @@ public class PlayerControllerTest {
     }
 
     @Test
+    public void createInvalidPlayer() throws Exception {
+        mockMvc.perform(post("/player")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{}")
+        )
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.status", Matchers.is(HttpStatus.BAD_REQUEST.value())))
+                .andExpect(jsonPath("$", Matchers.hasKey("error")));
+
+        verify(playerRepositoryMock, times(0)).save(any());
+    }
+
+    @Test
     public void deletePlayer() throws Exception {
         mockMvc.perform(post("/player")
                 .contentType(MediaType.APPLICATION_JSON)
