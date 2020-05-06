@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
+@ActiveProfiles("test")
 public class PlayerServiceTest {
 
     @Mock
@@ -77,6 +79,5 @@ public class PlayerServiceTest {
         this.playerServiceImplMock.delete(1l);
         verify(this.playerRepositoryMock, times(1)).deleteById(any());
     }
-
 
 }

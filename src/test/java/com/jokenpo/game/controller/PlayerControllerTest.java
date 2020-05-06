@@ -20,8 +20,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -93,6 +92,28 @@ public class PlayerControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status", Matchers.is(HttpStatus.OK.value())))
                 .andExpect(jsonPath("$", Matchers.hasKey("data")));
+
+        verify(playerRepositoryMock, times(1)).save(any());
+    }
+
+    @Test
+    public void deletePlayer() throws Exception {
+        mockMvc.perform(post("/player")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"name\": \"player name\"}")
+        )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status", Matchers.is(HttpStatus.OK.value())))
+                .andExpect(jsonPath("$", Matchers.hasKey("data")));
+
+        mockMvc.perform(delete("/player/{id}", 1)
+                .contentType(MediaType.APPLICATION_JSON)
+        )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status", Matchers.is(HttpStatus.OK.value())))
+                .andExpect(jsonPath("$", Matchers.hasKey("message")));
 
         verify(playerRepositoryMock, times(1)).save(any());
     }
