@@ -129,7 +129,20 @@ public class PlayerControllerTest {
                 .andExpect(jsonPath("$.status", Matchers.is(HttpStatus.OK.value())))
                 .andExpect(jsonPath("$", Matchers.hasKey("message")));
 
-        verify(playerRepositoryMock, times(1)).save(any());
+        verify(playerRepositoryMock, times(1)).delete(any());
+    }
+
+    @Test
+    public void deletePlayer_NotFound() throws Exception {
+        mockMvc.perform(delete("/player/{id}", 0)
+                .contentType(MediaType.APPLICATION_JSON)
+        )
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.status", Matchers.is(HttpStatus.NOT_FOUND.value())))
+                .andExpect(jsonPath("$", Matchers.hasKey("error")));
+
+        verify(playerRepositoryMock, times(0)).delete(any());
     }
 
 }
