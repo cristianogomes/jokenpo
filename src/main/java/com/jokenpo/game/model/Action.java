@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import java.util.Objects;
 
 @Entity
-public class Action {
+public class Action implements PersistentEntity {
 
     @Id
     @GeneratedValue
