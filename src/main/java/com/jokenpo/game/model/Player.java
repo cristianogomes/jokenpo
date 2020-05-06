@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class Player {
+public class Player implements PersistentEntity {
 	
 	@Id
 	@GeneratedValue
