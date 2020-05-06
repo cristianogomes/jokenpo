@@ -81,6 +81,49 @@ public class GameControllerTest {
     }
 
     @Test
+    public void removeMove() throws Exception {
+        mockMvc.perform(get("/jokenpo/reset"));
+
+        mockMvc.perform(post("/jokenpo/play")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"playerId\": \"1\", \"toolId\": \"1\"}")
+        )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status", Matchers.is(HttpStatus.OK.value())))
+                .andExpect(jsonPath("$", Matchers.hasKey("data")));
+
+        mockMvc.perform(post("/jokenpo/remove")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"id\": \"1\", \"name\": \"Player\"}")
+        )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status", Matchers.is(HttpStatus.OK.value())))
+                .andExpect(jsonPath("$", Matchers.hasKey("data")));
+
+        mockMvc.perform(get ("/jokenpo/result"))
+                .andDo(print())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data", Matchers.hasSize(0)));
+    }
+
+    @Test
+    public void removeMove_NotFound() throws Exception {
+        mockMvc.perform(get("/jokenpo/reset"));
+
+        mockMvc.perform(post("/jokenpo/remove")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"id\": \"1\", \"name\": \"Player\"}")
+        )
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.status", Matchers.is(HttpStatus.NOT_FOUND.value())))
+                .andExpect(jsonPath("$", Matchers.hasKey("error")));
+    }
+
+    @Test
     public void getWinner() throws Exception {
         mockMvc.perform(get("/jokenpo/reset"));
 

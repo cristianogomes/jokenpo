@@ -93,7 +93,7 @@ public class GameServiceTest {
     }
 
     @Test(expected = NotFoundException.class)
-    public void testRemoveMove_NotFound() throws NotFoundException, MoveAlreadyExistsException {
+    public void testRemoveMove_NotFound() throws NotFoundException {
         this.gameService.removeMove(new Player());
     }
 
