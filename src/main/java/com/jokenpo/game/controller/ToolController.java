@@ -2,7 +2,6 @@ package com.jokenpo.game.controller;
 
 import com.jokenpo.game.dto.ToolDTO;
 import com.jokenpo.game.exception.NotFoundException;
-import com.jokenpo.game.model.Player;
 import com.jokenpo.game.model.Tool;
 import com.jokenpo.game.response.Response;
 import com.jokenpo.game.response.ResponseBuilder;

@@ -5,7 +5,6 @@ import com.jokenpo.game.model.Player;
 import com.jokenpo.game.model.Tool;
 import com.jokenpo.game.repository.PlayerRepository;
 import com.jokenpo.game.repository.ToolRepository;
-import com.jokenpo.game.service.ToolService;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;

@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class Tool {
+public class Tool implements PersistentEntity {
 
     @Id
     @GeneratedValue
