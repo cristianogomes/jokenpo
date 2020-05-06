@@ -13,6 +13,6 @@ public interface AbstractService<ID extends Number, E extends PersistentEntity> 
 
     E findById(ID id) throws NotFoundException;
 
-    void delete(ID id);
+    void delete(ID id) throws NotFoundException;
 
 }

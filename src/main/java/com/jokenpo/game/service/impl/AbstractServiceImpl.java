@@ -37,7 +37,8 @@ public class AbstractServiceImpl<ID extends Number, E extends PersistentEntity, 
     }
 
     @Override
-    public void delete(ID id) {
-        this.repository.deleteById(id);
+    public void delete(ID id) throws NotFoundException {
+        E entity = this.findById(id);
+        this.repository.delete(entity);
     }
 }

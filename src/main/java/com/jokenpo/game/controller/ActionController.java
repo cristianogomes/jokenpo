@@ -53,7 +53,7 @@ public class ActionController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable Long id) {
+    public ResponseEntity delete(@PathVariable Long id) throws NotFoundException {
         this.actionService.delete(id);
 
         return new ResponseBuilder<Tool>().withMessage("Data deleted").build();
