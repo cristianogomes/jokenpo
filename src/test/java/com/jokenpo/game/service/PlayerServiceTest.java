@@ -16,7 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class PlayerServiceTest {
@@ -68,6 +69,13 @@ public class PlayerServiceTest {
     public void testFindAll_Empty() throws NotFoundException {
         when(this.playerRepositoryMock.findAll()).thenReturn(new ArrayList<>());
         this.playerServiceImplMock.findAll();
+    }
+
+    @Test
+    public void testDelete() {
+        doNothing().when(this.playerRepositoryMock).deleteById(any());
+        this.playerServiceImplMock.delete(1l);
+        verify(this.playerRepositoryMock, times(1)).deleteById(any());
     }
 
 

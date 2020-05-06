@@ -75,6 +75,29 @@ public class GameServiceTest {
     }
 
     @Test
+    public void testRemoveMove() throws NotFoundException, MoveAlreadyExistsException {
+        Player p1 = new Player();
+        p1.setId(1L);
+        p1.setName("Player Name");
+
+        when(this.playerServiceMock.findById(1L)).thenReturn(p1);
+
+        MoveDTO moveDTO = new MoveDTO();
+        moveDTO.setPlayerId(1l);
+
+        this.gameService.doMove(moveDTO);
+        this.gameService.removeMove(p1);
+
+        List<Result> result = this.gameService.getResult();
+        Assert.assertTrue(result.isEmpty());
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void testRemoveMove_NotFound() throws NotFoundException, MoveAlreadyExistsException {
+        this.gameService.removeMove(new Player());
+    }
+
+    @Test
     public void testWinner_Player1() throws NotFoundException, MoveAlreadyExistsException {
         Player p1 = new Player();
         p1.setId(1L);
