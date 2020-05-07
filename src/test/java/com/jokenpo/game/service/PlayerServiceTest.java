@@ -80,17 +80,16 @@ public class PlayerServiceTest {
         p1.setName("Player 1");
 
         when(this.playerRepositoryMock.findById(1L)).thenReturn(Optional.of(p1));
-        doNothing().when(this.playerRepositoryMock).deleteById(1L);
+        doNothing().when(this.playerRepositoryMock).delete(p1);
 
         this.playerServiceImplMock.delete(1l);
 
-        verify(this.playerRepositoryMock, times(0)).deleteById(1L);
+        verify(this.playerRepositoryMock, times(1)).delete(p1);
     }
 
     @Test(expected = NotFoundException.class)
     public void testDelete_NotFound() throws NotFoundException {
         this.playerServiceImplMock.delete(0l);
-        verify(this.playerRepositoryMock, times(1)).deleteById(any());
     }
 
 }
