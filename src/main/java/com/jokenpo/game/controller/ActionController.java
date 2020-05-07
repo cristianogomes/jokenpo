@@ -6,7 +6,7 @@ import com.jokenpo.game.model.Action;
 import com.jokenpo.game.model.Tool;
 import com.jokenpo.game.response.Response;
 import com.jokenpo.game.response.ResponseBuilder;
-import com.jokenpo.game.service.ActionService;
+import com.jokenpo.game.service.impl.ActionServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +20,10 @@ import java.util.List;
 public class ActionController {
 
     @Autowired
-    private ActionService actionService;
+    private ActionServiceImpl actionService;
 
     @PostMapping
-    public ResponseEntity<Response<Action>> create(@Valid @RequestBody ActionDTO actionDTO) {
+    public ResponseEntity<Response<Action>> create(@Valid @RequestBody ActionDTO actionDTO) throws NotFoundException {
 
         Action action = new Action();
         action.setSource(new Tool());
@@ -33,7 +33,7 @@ public class ActionController {
         BeanUtils.copyProperties(actionDTO.getTarget(), action.getTarget());
         BeanUtils.copyProperties(actionDTO.getSource(), action.getSource());
 
-        Action actionDb = this.actionService.create(action);
+        Action actionDb = this.actionService.createAction(action);
 
         return new ResponseBuilder<Action>().withData(actionDb).build();
     }

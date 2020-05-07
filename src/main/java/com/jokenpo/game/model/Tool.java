@@ -16,7 +16,7 @@ public class Tool implements PersistentEntity {
 
     private String name;
 
-    @OneToMany(mappedBy = "source", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "source", fetch = FetchType.EAGER)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<Action> actions;
 
