@@ -26,3 +26,6 @@ Exemplos:
     - Não há necessidade de utilização de banco de dados.
     - Não utilizar bibliotecas utilitárias externas.
     - O objetivo deste desafio é avaliar o seu conhecimento técnico, estilo de código, conhecimento de arquiteturas, padrões de programação e boas práticas. Faça disso uma oportunidade pra mostrar todo o seu conhecimento.
+    
+##### Documentação da API
+[Postman Collection](https://documenter.getpostman.com/view/3335352/SzmccKN4)
