@@ -29,23 +29,11 @@
 				},
 				{
 					"name": "http://localhost:8080/tool/{id}",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\": \"teste\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:8080/tool/1",
+							"raw": "http://localhost:8080/tool/1000",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -53,7 +41,7 @@
 							"port": "8080",
 							"path": [
 								"tool",
-								"1"
+								"1000"
 							]
 						}
 					},
@@ -64,17 +52,8 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\": \"teste\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:8080/tool/1",
+							"raw": "http://localhost:8080/tool/1000",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -82,7 +61,7 @@
 							"port": "8080",
 							"path": [
 								"tool",
-								"1"
+								"1000"
 							]
 						}
 					},
@@ -147,7 +126,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/action/20",
+							"raw": "http://localhost:8080/action/4000",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -155,7 +134,7 @@
 							"port": "8080",
 							"path": [
 								"action",
-								"20"
+								"4000"
 							]
 						}
 					},
@@ -166,17 +145,8 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"description\": \"esmaga\",\r\n    \"source\": {\r\n        \"id\": 1,\r\n        \"name\": \"pedra\"\r\n    },\r\n    \"target\": {\r\n        \"id\": 4,\r\n        \"name\": \"lagarto\"\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:8080/action/1",
+							"raw": "http://localhost:8080/action/4000",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -184,7 +154,7 @@
 							"port": "8080",
 							"path": [
 								"action",
-								"1"
+								"4000"
 							]
 						}
 					},
@@ -197,7 +167,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"pedra\"\n}",
+							"raw": "{\r\n    \"description\": \"esmaga\",\r\n    \"source\": {\r\n    \t\"id\": 1000,\r\n        \"name\": \"pedra\"\r\n    },\r\n    \"target\": {\r\n        \"id\": 4000,\r\n        \"name\": \"lagarto\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -249,7 +219,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/player/4",
+							"raw": "http://localhost:8080/player/1000",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -257,7 +227,7 @@
 							"port": "8080",
 							"path": [
 								"player",
-								"4"
+								"1000"
 							]
 						}
 					},
@@ -268,17 +238,8 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"description\": \"esmaga\",\r\n    \"source\": {\r\n        \"id\": 1,\r\n        \"name\": \"pedra\"\r\n    },\r\n    \"target\": {\r\n        \"id\": 4,\r\n        \"name\": \"lagarto\"\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:8080/player/4",
+							"raw": "http://localhost:8080/player/1000",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -286,7 +247,7 @@
 							"port": "8080",
 							"path": [
 								"player",
-								"4"
+								"1000"
 							]
 						}
 					},
@@ -299,7 +260,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Gomes\"\n}",
+							"raw": "{\n\t\"name\": \"Teste\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -367,13 +328,13 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:8080/jokenpo",
+					"name": "http://localhost:8080/jokenpo/play",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"playerId\": 1,\n\t\"toolId\": 1\n}",
+							"raw": "{\n\t\"playerId\": 2000,\n\t\"toolId\": 4000\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -381,14 +342,44 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/jokenpo",
+							"raw": "http://localhost:8080/jokenpo/play",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"jokenpo"
+								"jokenpo",
+								"play"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/jokenpo/remove",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 1000,\n\t\"name\": \"Player 1000\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/jokenpo/remove",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"jokenpo",
+								"remove"
 							]
 						}
 					},
